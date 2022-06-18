@@ -65,5 +65,12 @@ describe('server', function() {
     });
   });
 
+  // it('should respond to PATCH requests for /classes/messages with a 405 status code', function(done) {
+  //   request('http:127.0.0.1:3000/classes/messages', function(error, response, body) {
+  //     // console.log('request:', request);
+  //     expect(response.statusCode).to.equal(405);
+  //     done();
+  //   });
+  // });
 
 });

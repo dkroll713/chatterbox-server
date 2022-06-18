@@ -91,4 +91,25 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
+  // it('Should accept patches to /classes/messages', function() {
+  //   var stubMsg = {
+  //     username: 'Jono',
+  //     text: 'Do not do my bidding!'
+  //   };
+  //   var req = new stubs.request('/classes/messages', 'PATCH', stubMsg);
+  //   // console.log('request:', req);
+  //   // request.on('data', console.log(data));
+  //   var res = new stubs.response();
+  //   console.log('res', res);
+
+  //   handler.requestHandler(req, res);
+
+  //   // Expect 405 Error response status
+  //   expect(res._responseCode).to.equal(405);
+
+  //   // Testing for a newline isn't a valid test
+  //   // TODO: Replace with with a valid test
+  //   // expect(res._data).to.equal(JSON.stringify('\n'));
+  //   expect(res._ended).to.equal(true);
+  // });
 });
