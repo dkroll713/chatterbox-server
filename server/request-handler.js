@@ -12,9 +12,11 @@ this file and include it in basic-server.js so that it actually works.
 
 **************************************************************/
 
+var fs = require('fs');
+
 var defaultCorsHeaders = {
   'access-control-allow-origin': '*',
-  'access-control-allow-methods': 'GET, PATCH, POST, PUT, DELETE, OPTIONS',
+  'access-control-allow-methods': 'GET,PATCH, POST, PUT, DELETE, OPTIONS',
   'access-control-allow-headers': 'content-type, accept, authorization',
   'access-control-max-age': 10 // Seconds.
 };
@@ -66,7 +68,76 @@ var requestHandler = function(request, response) {
   //
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
-  if (request.url === '/classes/messages') {
+  if (request.url === '/') {
+    if (request.method === 'GET') { // For this method we will need to edit client code to send POST with username data
+      statusCode = 200;
+      response.writeHead(statusCode, headers);
+      //response.end(fs.readFileSync(`chatterbox.html/???username=${data}`));
+    }
+    console.log('hello');
+    response.writeHead(200, {'content-type': 'text/html'});
+    // response.write(fs.readFileSync('node_modules/underscore/underscore.js'));
+    response.end(fs.readFileSync('chatterbox.html'));
+
+  } else if ( request.url === '/client/styles/styles.css') {
+    response.writeHead(200, {'content-type': 'text/css'});
+    response.end(fs.readFileSync('client/styles/styles.css'));
+
+  } else if ( request.url === '/client/images/spiffygif_46x46.gif' ) {
+    console.log('loading image');
+    response.writeHead(200, {'content-type': 'image/gif'});
+    response.end(fs.readFileSync('client/images/spiffygif_46x46.gif'));
+
+  } else if ( request.url === '/client/env/config.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/env/config.js'));
+
+  } else if ( request.url === '/client/scripts/parse.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/parse.js'));
+
+  } else if ( request.url === '/client/scripts/rooms.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/rooms.js'));
+
+  } else if ( request.url === '/client/scripts/friends.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/friends.js'));
+
+  } else if ( request.url === '/client/scripts/messages.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/messages.js'));
+
+  } else if ( request.url === '/client/scripts/formView.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/formView.js'));
+
+  } else if ( request.url === '/client/scripts/roomsView.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/roomsView.js'));
+
+  } else if ( request.url === '/client/scripts/messageView.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/messageView.js'));
+
+  } else if ( request.url === '/client/scripts/messagesView.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/messagesView.js'));
+
+  } else if ( request.url === '/client/scripts/app.js') {
+    response.writeHead(200, {'content-type': 'text/javascript'});
+    response.end(fs.readFileSync('client/scripts/app.js'));
+
+  // }
+  // else if ( request.url === '/client/scripts/userName.js') {
+  //   response.writeHead(200, {'content-type': 'text/javascript'});
+  //   response.end(fs.readFileSync('client/scripts/userName.js'));
+
+  } else if (request.url.includes('username')) {
+    console.log('username');
+    response.write(fs.readFileSync('chatterbox.html'));
+
+  } else if (request.url === '/classes/messages') {
     // response.end('Hello,404 World!');
     if (request.method === 'OPTIONS') {
       statusCode = 200;

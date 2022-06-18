@@ -1,36 +1,40 @@
+// This object houses all the message _data_ for the app.
+// Treat it like a data structure - add methods to interact
+// with and manipulate the data.
+
 var Messages = {
 
+  // TODO: Define how you want to store your messages.
+  _data: [],
 
-  _data: {},
+  // TODO: Define methods which allow you to retrieve from,
+  // add to, and generally interact with the messages.
+  // use body.append(messages to post messages)
 
-  items: function() {
-    return _.chain(Object.values(Messages._data)).sortBy('createdAt');
+  getAllMessages: () => {
+    console.log(Messages._data);
   },
 
-  add: function(message, callback = ()=>{}) {
-    Messages._data[message.message_id] = message;
-    callback(Messages.items());
+  getFirstMessage: () => {
+    console.log(Messages._data[0]);
+    return Messages._data[0];
   },
 
-  update: function(messages, callback = ()=>{}) {
-    var length = Object.keys(Messages._data).length;
-
-    for (let message of messages) {
-      Messages._data[message.message_id] = Messages._conform(message);
-    }
-
-    // only invoke the callback if something changed
-    if (Object.keys(Messages._data).length !== length) {
-      callback(Messages.items());
-    }
-  },
-
-  _conform: function(message) {
-    // ensure each message object conforms to expected shape
-    message.text = message.text || '';
-    message.username = message.username || '';
-    message.roomname = message.roomname || '';
-    return message;
+  sendMessage: () => {
+    $message = $('#message');
+    $submit = $('#submit');
+    $submit.on('click', function() {
+      console.log(message.text);
+    });
+    return $message.text();
   }
-  
+
 };
+
+// console.log(Messages._data);
+
+var date = new Date();
+var mdy = date.getFullYear() + '-' + 6 + '-' + date.getDate() + 'T';
+var time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + (date.getMilliseconds() / 100 + 'Z');
+var dateTime = mdy + time;
+// console.log(mdy + time);
